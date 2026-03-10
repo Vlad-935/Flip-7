@@ -5,7 +5,7 @@
 #include "cards.h"
 #include "player.h"
 
-void round(int player_count, deck cards, Players *player)
+void game_round(int player_count, deck cards, Players *player)
 {
 	for (int i = 0; i < player_count; i++) {
 		if (player[i].in_game) {
@@ -28,7 +28,7 @@ void game(int player_count, deck cards, Players player)
 	while (!winner) {
 		int active_players = player_count;
 		while (!active_players) {
-			round(player_count, cards, &player);
+			game_round(player_count, cards, &player);
 		}
 	}
 }
