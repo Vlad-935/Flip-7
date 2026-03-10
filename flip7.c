@@ -1,4 +1,5 @@
 #include "cards.h"
+#include "hit.h"
 #include "player.h"
 
 void game_round(int player_count, deck cards, Players *player)
@@ -9,9 +10,15 @@ void game_round(int player_count, deck cards, Players *player)
 			printf("Player %d: Hit/Stay\n", i + 1);
 			scanf("%d", &option);
 
-			if (option == 2) {	// stay
-				player[i].in_game = false;
-			} else {  // hit
+			switch (option) {
+				case 1:	 // hit
+					break;
+				case 2:	 // stay
+					player[i].in_game = false;
+					break;
+				default:
+					printf("Optiune inexistenta, incercati din nou.\n");
+					i--;
 			}
 		}
 	}
