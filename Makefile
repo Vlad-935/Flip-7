@@ -1,15 +1,20 @@
 # Compiler setup.
 CC = gcc
-CFLAGS = -I./include -Wall -Wextra -std=c99
+CFLAGS = -I./include -Wall -Wextra
+
+# Search for .c files
+SRC_DIR = source
+
+SRCS = $(wildcard $(SRC_DIR)/*.c)
 
 # Define targets.
-TARGETS = Flip7
+TARGET = Flip7
 
 # Manually define all targets.
-build: $(TARGETS)
+build: $(TARGET)
 
 Flip7: flip7.c
-	$(CC) $(CFLAGS) *.c -o Flip7
+	$(CC) $(CFLAGS) $(SRCS) -o Flip7
 
 # Clean the solution.
 clean:
