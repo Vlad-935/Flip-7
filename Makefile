@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -I./cards -Wall
+CFLAGS = -I./include -Wall
 
 # Listăm toate fișierele sursă
-SRCS = flip7.c cards/cards.c
+SRCS = flip7.c source/cards.c
 
 # Generăm numele executabilului
 TARGET = flip7
