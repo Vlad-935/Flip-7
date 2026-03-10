@@ -1,14 +1,14 @@
 # Compiler setup.
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -I./include -Wall -Wextra -std=c99
 
 # Define targets.
-TARGETS = flip7
+TARGETS = Flip7
 
 # Manually define all targets.
 build: $(TARGETS)
 
-runic: runic.c
+Flip7: flip7.c
 	$(CC) $(CFLAGS) *.c -o Flip7
 
 # Clean the solution.
