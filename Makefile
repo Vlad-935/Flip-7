@@ -5,7 +5,7 @@ CFLAGS = -I./include -Wall -Wextra
 # Search for .c files
 SRC_DIR = source
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = flip7.c $(wildcard $(SRC_DIR)/*.c)
 
 # Define targets.
 TARGET = Flip7
