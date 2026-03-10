@@ -1,7 +1,3 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "cards.h"
 #include "player.h"
 
