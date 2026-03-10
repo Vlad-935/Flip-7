@@ -1,15 +1,16 @@
 #ifndef CARDS
 #define Cards
 
+// All the specials cards (action/bonus)
 enum cards {
 	freeze = 13,
 	second_chance,
 	flip_three,
-	b_two,
-	b_four,
-	b_six,
-	b_eight,
-	b_ten,
+	plus_two,
+	plus_four,
+	plus_six,
+	plus_eight,
+	plus_ten,
 	times_two
 };
 
