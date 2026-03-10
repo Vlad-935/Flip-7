@@ -1,5 +1,5 @@
 #ifndef CARDS
-#define Cards
+#define CARDS
 
 // All the specials cards (action/bonus)
 enum cards {
