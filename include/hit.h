@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "cards.h"
 #include "player.h"
 
-void hit(int cards[], Players player);
+
+void hit(deck cards[], Players player);
 
 #endif
