@@ -3,7 +3,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 
 # Define targets.
-TARGETS = Flip7
+TARGETS = flip7
 
 # Manually define all targets.
 build: $(TARGETS)
