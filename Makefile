@@ -1,14 +1,16 @@
+# Compiler setup.
 CC = gcc
-CFLAGS = -I./include -Wall
+CFLAGS = -Wall -Wextra -std=c99
 
-# Listăm toate fișierele sursă
-SRCS = flip7.c source/cards.c
+# Define targets.
+TARGETS = Flip7
 
-# Generăm numele executabilului
-TARGET = flip7
+# Manually define all targets.
+build: $(TARGETS)
 
-all:
-	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
+runic: runic.c
+	$(CC) $(CFLAGS) *.c -o Flip7
 
+# Clean the solution.
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGETS)
