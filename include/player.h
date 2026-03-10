@@ -2,6 +2,7 @@
 #define PLAYER
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct {
 	int total_points, round_points;
