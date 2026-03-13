@@ -6,6 +6,8 @@ CFLAGS = -I./include -Wall -Wextra
 SRC_DIR = source
 
 SRCS = flip7.c $(wildcard $(SRC_DIR)/*.c)
+HDRS = $(wildcard include/*.h) 
+OBJS = $(SRCS:.c=.o)
 
 # Define targets.
 TARGET = Flip7
@@ -13,9 +15,15 @@ TARGET = Flip7
 # Manually define all targets.
 build: $(TARGET)
 
-Flip7: flip7.c
-	$(CC) $(CFLAGS) $(SRCS) -o Flip7
+$(TARGET) : $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	rm -f $(OBJS)
+
+# Searching for headers
+%.o: %.c $(HDRS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean the solution.
 clean:
-	rm -f $(TARGETS)
+	rm -f $(OBJS) $(TARGETS)
+
