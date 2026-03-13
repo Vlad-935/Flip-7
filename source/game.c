@@ -5,6 +5,8 @@
 
 #include "utils.h"
 
+#define time 3000
+
 void game_round(int player_count, deck cards, Players *player)
 {
 	// New round
@@ -31,15 +33,26 @@ void game_round(int player_count, deck cards, Players *player)
 			switch (option) {
 				case 1:	 // hit
 					hit(&cards, &player[players_turn]);
+
+					bool busted = update_bust_state(&player[players_turn]);
+					if (busted) {
+						clear_screen();
+						printf("Player %d busted!\n", players_turn);
+						delay_ms(time);
+
+						active_players--;
+					}
+
 					break;
 				case 2:	 // stay
 					player[players_turn].in_game = false;
 					active_players--;
+
 					break;
 				default:
 					clear_screen();
 					printf("Not an option, try again.\n");
-					delay_ms(3000);
+					delay_ms(time);
 
 					players_turn--;
 			}
@@ -58,7 +71,7 @@ void game(int player_count, deck cards, Players *player)
 
 		clear_screen();
 		printf("Round ended!\n");
-		delay_ms(3000);
+		delay_ms(time);
 	}
 
 	printf(

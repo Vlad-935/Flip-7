@@ -5,6 +5,9 @@
 
 #include "utils.h"
 
+#define diff_cards 22
+#define time 3000
+
 // Sets the number of every card in the deck
 void card_setup(deck *cards)
 {
@@ -22,12 +25,12 @@ void card_setup(deck *cards)
 	cards->main[flip_three] = action_cards_nmb;
 
 	int special_cards_nmb = 1;
-	for (int i = 16; i <= 21; i++) {
+	for (int i = 16; i < diff_cards; i++) {
 		cards->main[i] = special_cards_nmb;
 	}
 
 	int empty = 0;
-	for (int i = 0; i <= 21; i++) {
+	for (int i = 0; i < diff_cards; i++) {
 		cards->discard[i] = empty;
 	}
 }
@@ -38,9 +41,9 @@ void reshuffle_deck(deck *cards)
 		// Transfering the discard pile to the main pile if empty
 		clear_screen();
 		printf("Reshuffling deck, please wait.\n");
-		delay_ms(2000);
+		delay_ms(time);
 
-		for (int i = 0; i < 22; i++) {
+		for (int i = 0; i < diff_cards; i++) {
 			cards->main[i] = cards->discard[i];
 			cards->discard[i] = 0;
 		}
@@ -52,7 +55,7 @@ void reshuffle_deck(deck *cards)
 
 void hit(deck *cards, Players *player)
 {
-	int card = rand() % 22;
+	int card = rand() % diff_cards;
 	printf("Card: %d\n", card);
 
 	reshuffle_deck(cards);	// Verify if deck is empty and reshuffle it

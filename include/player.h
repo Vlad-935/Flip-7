@@ -11,4 +11,6 @@ typedef struct {
 
 Players *player_setup(int player_count);
 
+bool update_bust_state(Players *player);
+
 #endif
