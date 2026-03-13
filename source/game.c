@@ -7,6 +7,50 @@
 
 #define time 3000
 
+void show_cards(Players player)
+{
+	// Number cards
+	for (int i = 0; i <= 12; i++) {
+		if (player.cards_in_hand[i] > 0) {
+			printf("%d ", i);
+		}
+	}
+	printf("\n");
+
+	// Action cards
+	if (player.cards_in_hand[freeze] > 0) {
+		printf("Freeze x%d ", player.cards_in_hand[freeze]);
+	}
+	if (player.cards_in_hand[second_chance] > 0) {
+		printf("Second Chance x%d ", player.cards_in_hand[second_chance]);
+	}
+	if (player.cards_in_hand[flip_three] > 0) {
+		printf("Flip Three x%d ", player.cards_in_hand[flip_three]);
+	}
+	printf("\n");
+
+	// Special cards
+	if (player.cards_in_hand[plus_two] == 1) {
+		printf("+2 ");
+	}
+	if (player.cards_in_hand[plus_four] == 1) {
+		printf("+4 ");
+	}
+	if (player.cards_in_hand[plus_six] == 1) {
+		printf("+6 ");
+	}
+	if (player.cards_in_hand[plus_eight] == 1) {
+		printf("+8 ");
+	}
+	if (player.cards_in_hand[plus_ten] == 1) {
+		printf("+10 ");
+	}
+	if (player.cards_in_hand[times_two] == 1) {
+		printf("x2 ");
+	}
+	printf("\n");
+}
+
 void make_choice(int players_turn, int active_players,
 				 deck cards, Players *player)
 {
@@ -14,6 +58,7 @@ void make_choice(int players_turn, int active_players,
 
 	clear_screen();
 	printf("Player %d: Hit/Stay\n", players_turn);
+	show_cards(player[players_turn]);
 	scanf("%d", &option);
 
 	switch (option) {
