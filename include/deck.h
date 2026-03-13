@@ -1,6 +1,8 @@
 #ifndef CARDS
 #define CARDS
 
+#include "player.h"
+
 // All the specials cards (action/bonus)
 enum cards {
 	freeze = 13,
@@ -20,5 +22,9 @@ typedef struct {
 } deck;
 
 void card_setup(deck *cards);
+
+void reshuffle_deck(deck *cards);
+
+void hit(deck *cards, Players *player);
 
 #endif

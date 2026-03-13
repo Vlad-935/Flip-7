@@ -1,8 +1,7 @@
 #include <stdio.h>
 
-#include "cards.h"
+#include "deck.h"
 #include "game.h"
-#include "hit.h"
 #include "player.h"
 
 int main(void)
@@ -18,6 +17,5 @@ int main(void)
 	Players *player = player_setup(player_count);
 
 	game(player_count, cards, player);
-
 	return 0;
 }
