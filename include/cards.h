@@ -16,7 +16,7 @@ enum cards {
 
 typedef struct {
 	int main[22], discard[22];
-	int total_nmb;
+	int total_nmb, dicard_nmb;
 } deck;
 
 void card_setup(deck *cards);

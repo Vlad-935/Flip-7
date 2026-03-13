@@ -5,6 +5,7 @@
 void card_setup(deck *cards)
 {
 	cards->total_nmb = 94;
+	cards->dicard_nmb = 0;
 
 	cards->main[0] = 1;	 // special number 0
 	for (int i = 1; i <= 12; i++) {
