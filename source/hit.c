@@ -1,5 +1,8 @@
 #include "hit.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 void hit(deck cards[], Players player)
 {
 	int card = rand() % 22;

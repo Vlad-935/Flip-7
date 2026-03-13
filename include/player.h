@@ -2,7 +2,6 @@
 #define PLAYER
 
 #include <stdbool.h>
-#include <stdlib.h>
 
 typedef struct {
 	int total_points, round_points;
@@ -10,6 +9,6 @@ typedef struct {
 	bool in_game;
 } Players;
 
-Players player_setup(int player_count);
+Players *player_setup(int player_count);
 
 #endif
