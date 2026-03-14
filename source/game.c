@@ -7,71 +7,6 @@
 
 #define text_time 2000
 
-void show_cards(Players player)
-{
-	bool printed;
-
-	// Number cards
-	printed = false;
-	for (int i = 0; i <= 12; i++) {
-		if (player.cards_in_hand[i] > 0) {
-			printf("%d ", i);
-			printed = true;
-		}
-	}
-	if (printed) {
-		printf("\n");
-	}
-
-	// Action cards
-	printed = false;
-	if (player.cards_in_hand[freeze] > 0) {
-		printf("Freeze x%d ", player.cards_in_hand[freeze]);
-		printed = true;
-	}
-	if (player.cards_in_hand[second_chance] > 0) {
-		printf("Second Chance x%d ", player.cards_in_hand[second_chance]);
-		printed = true;
-	}
-	if (player.cards_in_hand[flip_three] > 0) {
-		printf("Flip Three x%d ", player.cards_in_hand[flip_three]);
-		printed = true;
-	}
-	if (printed) {
-		printf("\n");
-	}
-
-	// Special cards
-	printed = false;
-	if (player.cards_in_hand[plus_two] == 1) {
-		printf("+2 ");
-		printed = true;
-	}
-	if (player.cards_in_hand[plus_four] == 1) {
-		printf("+4 ");
-		printed = true;
-	}
-	if (player.cards_in_hand[plus_six] == 1) {
-		printf("+6 ");
-		printed = true;
-	}
-	if (player.cards_in_hand[plus_eight] == 1) {
-		printf("+8 ");
-		printed = true;
-	}
-	if (player.cards_in_hand[plus_ten] == 1) {
-		printf("+10 ");
-		printed = true;
-	}
-	if (player.cards_in_hand[times_two] == 1) {
-		printf("x2 ");
-		printed = true;
-	}
-	if (printed) {
-		printf("\n");
-	}
-}
-
 void make_choice(int *players_turn, int *active_players,
 				 deck *cards, Players *player)
 {
@@ -80,7 +15,7 @@ void make_choice(int *players_turn, int *active_players,
 	clear_screen();
 	printf("Player %d: Hit/Stay\n", *players_turn);
 
-	show_cards(player[*players_turn]);
+	show_player_cards(player[*players_turn]);
 	scanf("%d", &option);
 
 	switch (option) {

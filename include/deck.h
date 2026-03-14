@@ -23,6 +23,8 @@ typedef struct {
 
 void card_setup(deck *cards);
 
+void show_card(int card);
+
 void reshuffle_deck(deck *cards);
 
 void hit(deck *cards, Players *player);
