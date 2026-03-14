@@ -55,11 +55,8 @@ void make_choice(int *players_turn, int *active_players,
 	}
 }
 
-void game_round(int player_count, deck *cards, Players *player)
+void new_round_setup(int player_count, Players *player)
 {
-	// New round
-	int players_turn = 1, active_players = player_count;
-	bool flip7 = false;
 	for (int i = 1; i <= player_count; i++) {
 		player[i].in_game = true;
 		player[i].busted = false;
@@ -68,6 +65,14 @@ void game_round(int player_count, deck *cards, Players *player)
 			player[i].cards_in_hand[j] = 0;
 		}
 	}
+}
+
+void game_round(int player_count, deck *cards, Players *player)
+{
+	// New round
+	int players_turn = 1, active_players = player_count;
+	bool flip7 = false;
+	new_round_setup(player_count, player);
 
 	// Play until everyone is out, or someone got a flip7
 	while (active_players && !flip7) {
