@@ -12,10 +12,9 @@ Players *player_setup(int player_count)
 
 	for (int i = 1; i <= player_count; i++) {
 		player[i].in_game = true;
-		player[i].round_points = 0;
+		player[i].busted = false;
 		player[i].total_points = 0;
 		player[i].different_cards = 0;
-		player[i].total_cards = 0;
 
 		for (int j = 0; j <= 21; j++) {
 			player[i].cards_in_hand[j] = 0;
@@ -25,19 +24,15 @@ Players *player_setup(int player_count)
 	return player;
 }
 
-bool update_bust_state(Players *player)
+void update_bust_state(Players *player)
 {
 	int diff_cards = 13;
 	for (int i = 0; i < diff_cards; i++) {
 		if (player->cards_in_hand[i] > 1) {
 			player->in_game = false;
-			player->round_points = 0;
-
-			return true;
+			player->busted = true;
 		}
 	}
-
-	return false;
 }
 
 void show_player_cards(Players player)
@@ -144,4 +139,16 @@ int calculate_points(Players player)
 	}
 
 	return round_points;
+}
+
+void end_round(int player_count, Players *player)
+{
+	for (int i = 1; i <= player_count; i++) {
+		if (!player[i].busted) {
+			int round_points = calculate_points(player[i]);
+			player[i].total_points += round_points;
+		}
+
+		player[i].in_game = false;
+	}
 }
