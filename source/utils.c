@@ -11,6 +11,7 @@
 void clear_screen(void)
 {
 	printf("\033[H\033[J");
+	fflush(stdout);
 }
 
 void delay_ms(int milliseconds)

@@ -63,7 +63,7 @@ void hit(deck *cards, Players *player)
 		card = rand() % diff_cards;	 // Searches an avaiable card
 	} while (cards->main[card] == 0);
 
-	printf("Card: %d", card);
+	printf("Card: %d\n", card);
 	delay_ms(text_time);
 
 	cards->main[card]--;

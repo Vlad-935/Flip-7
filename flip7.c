@@ -6,7 +6,7 @@
 
 int main(void)
 {
-	setbuf(stdout, NULL);
+	// setbuf(stdout, NULL);
 
 	int player_count;
 	deck cards;
