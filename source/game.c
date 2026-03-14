@@ -13,9 +13,14 @@ void make_choice(int *players_turn, int *active_players,
 	int option;
 
 	clear_screen();
-	printf("Player %d: Hit/Stay\n", *players_turn);
-
+	printf(
+		"Player %d:\n"
+		"Points: %d\n"
+		"Current cards:\n",
+		*players_turn, player[*players_turn].total_points);
 	show_player_cards(player[*players_turn]);
+	printf("Hit/Stay\n");
+
 	scanf("%d", &option);
 
 	switch (option) {
@@ -33,6 +38,9 @@ void make_choice(int *players_turn, int *active_players,
 
 			break;
 		case 2:	 // stay
+			int round_points = calculate_points(player[*players_turn]);
+			player[*players_turn].total_points += round_points;
+
 			player[*players_turn].in_game = false;
 			(*active_players)--;
 
