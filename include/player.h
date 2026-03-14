@@ -15,4 +15,6 @@ bool update_bust_state(Players *player);
 
 void show_player_cards(Players player);
 
+int calculate_points(Players player);
+
 #endif
