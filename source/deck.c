@@ -35,6 +35,47 @@ void card_setup(deck *cards)
 	}
 }
 
+void show_card(int card)
+{
+	// Number cards
+	if (card <= 12) {
+		printf("Card: %d\n", card);
+	}
+
+	// Action cards
+	if (card == freeze) {
+		printf("Card: Freeze\n");
+	}
+	if (card == second_chance) {
+		printf("Card: Second Chance\n");
+	}
+	if (card == flip_three) {
+		printf("Card: Flip Three\n");
+	}
+
+	// Bonus cards
+	if (card == plus_two) {
+		printf("Card: +2\n");
+	}
+	if (card == plus_four) {
+		printf("Card: +4\n");
+	}
+	if (card == plus_six) {
+		printf("Card: +6\n");
+	}
+	if (card == plus_eight) {
+		printf("Card: +8\n");
+	}
+	if (card == plus_ten) {
+		printf("Card: +10\n");
+	}
+	if (card == times_two) {
+		printf("Card: x2\n");
+	}
+
+	delay_ms(text_time);
+}
+
 void reshuffle_deck(deck *cards)
 {
 	if (!cards->total_nmb) {
@@ -63,8 +104,7 @@ void hit(deck *cards, Players *player)
 		card = rand() % diff_cards;	 // Searches an avaiable card
 	} while (cards->main[card] == 0);
 
-	printf("Card: %d", card);
-	delay_ms(text_time);
+	show_card(card);
 
 	cards->main[card]--;
 	cards->total_nmb--;
