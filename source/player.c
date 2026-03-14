@@ -104,7 +104,7 @@ int calculate_points(Players player)
 {
 	int round_points = 0;
 
-	if (!player.in_game) {
+	if (player.busted) {
 		return 0;
 	}
 
@@ -144,10 +144,8 @@ int calculate_points(Players player)
 void end_round(int player_count, Players *player)
 {
 	for (int i = 1; i <= player_count; i++) {
-		if (!player[i].busted) {
-			int round_points = calculate_points(player[i]);
-			player[i].total_points += round_points;
-		}
+		int round_points = calculate_points(player[i]);
+		player[i].total_points += round_points;
 
 		player[i].in_game = false;
 	}

@@ -39,14 +39,11 @@ void make_choice(int *players_turn, int *active_players,
 
 			break;
 		case 2:	 // stay
-			int round_points = calculate_points(player[*players_turn]);
-			player[*players_turn].total_points += round_points;
-
 			player[*players_turn].in_game = false;
 			(*active_players)--;
 
 			break;
-		default:
+		default:  // error
 			clear_screen();
 			printf("Not an option, try again.\n");
 			delay_ms(text_time);
