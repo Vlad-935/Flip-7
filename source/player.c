@@ -104,3 +104,44 @@ void show_player_cards(Players player)
 		printf("\n");
 	}
 }
+
+int calculate_points(Players player)
+{
+	int round_points = 0;
+
+	if (!player.in_game) {
+		return 0;
+	}
+
+	for (int i = 0; i <= 12; i++) {
+		if (player.cards_in_hand[i] > 0) {
+			round_points += i;
+		}
+	}
+
+	if (player.cards_in_hand[times_two] == 1) {
+		round_points *= 2;
+	}
+
+	if (player.cards_in_hand[plus_two] == 1) {
+		round_points += 2;
+	}
+	if (player.cards_in_hand[plus_four] == 1) {
+		round_points += 4;
+	}
+	if (player.cards_in_hand[plus_six] == 1) {
+		round_points += 6;
+	}
+	if (player.cards_in_hand[plus_eight] == 1) {
+		round_points += 8;
+	}
+	if (player.cards_in_hand[plus_ten] == 1) {
+		round_points += 10;
+	}
+
+	if (player.different_cards == 7) {
+		round_points += 15;
+	}
+
+	return round_points;
+}
