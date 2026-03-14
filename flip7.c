@@ -6,6 +6,8 @@
 
 int main(void)
 {
+	setbuf(stdout, NULL);
+
 	int player_count;
 	deck cards;
 
@@ -16,6 +18,6 @@ int main(void)
 
 	Players *player = player_setup(player_count);
 
-	game(player_count, cards, player);
+	game(player_count, &cards, player);
 	return 0;
 }
