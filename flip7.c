@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "deck.h"
 #include "game.h"
@@ -6,7 +8,7 @@
 
 int main(void)
 {
-	// setbuf(stdout, NULL);
+	srand(time(NULL));
 
 	int player_count;
 	deck cards;
