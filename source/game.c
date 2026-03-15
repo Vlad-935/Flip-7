@@ -34,7 +34,12 @@ void make_choice(round_state *round, deck *cards, Players *player)
 		case 1:	 // hit
 			hit(cards, &player[round->players_turn]);
 
-			bust(&round->active_players, &player[round->players_turn]);
+			bool busted;
+			busted = bust(&player[round->players_turn]);
+
+			if (busted) {
+				round->active_players--;
+			}
 
 			break;
 		case 2:	 // stay
