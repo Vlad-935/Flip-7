@@ -19,6 +19,7 @@ void new_round_setup(round_state *round, Players *player)
 			player[i].cards_in_hand[j] = 0;
 		}
 		player[i].total_cards = 0;
+		player[i].different_cards = 0;
 	}
 }
 

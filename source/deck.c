@@ -94,16 +94,19 @@ void reshuffle_deck(deck *cards)
 void action_cards(int card, deck *cards, Players *player)
 {
 	if (card == freeze) {
-		// Needs a new if to see if it their first card
 		if (player->total_cards > 1) {
 			player->in_game = false;
-			printf("Player is out: Freeze\n");
+			clear_screen();
+			printf("Player %d is out: Freeze\n", player->id);
+			delay_ms(text_time);
+		} else {
 		}
 	}
 
 	if (card == flip_three) {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3 && player->in_game; i++) {
 			hit(cards, player);
+			bust(player);
 		}
 	}
 }
@@ -123,9 +126,13 @@ void hit(deck *cards, Players *player)
 	cards->main[card]--;
 	cards->total_nmb--;
 
+	// Needs to be moved (after the round is finished)
 	cards->discard[card]++;
 	cards->dicard_nmb++;
 
 	player->total_cards++;
 	player->cards_in_hand[card]++;
+	if (card < diff_cards) {
+		player->different_cards++;
+	}
 }
