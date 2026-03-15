@@ -36,14 +36,7 @@ void make_choice(round_state *round, deck *cards, Players *player)
 		case 1:	 // hit
 			hit(cards, &player[round->players_turn]);
 
-			update_bust_state(&player[round->players_turn]);  // Set player as busted if they have 2 dublicates
-			if (player[round->players_turn].busted) {
-				clear_screen();
-				printf("Player %d busted!\n", round->players_turn);
-				delay_ms(text_time);
-
-				round->active_players--;
-			}
+			bust(&round->active_players, &player[round->players_turn]);
 
 			break;
 		case 2:	 // stay

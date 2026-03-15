@@ -17,6 +17,8 @@ Players *player_setup(int player_count);
 
 void update_bust_state(Players *player);
 
+void bust(int *active_players, Players *player);
+
 void show_player_cards(Players player);
 
 int calculate_points(Players player);

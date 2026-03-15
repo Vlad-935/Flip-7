@@ -40,6 +40,18 @@ void update_bust_state(Players *player)
 	}
 }
 
+void bust(int *active_players, Players *player)
+{
+	update_bust_state(player);	// Set player as busted if they have 2 dublicates
+	if (player->busted) {
+		clear_screen();
+		printf("Player %d busted!\n", player->id);
+		delay_ms(text_time);
+
+		(*active_players)--;
+	}
+}
+
 void show_player_cards(Players player)
 {
 	clear_screen();
