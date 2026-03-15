@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "game.h"
 #include "utils.h"
 
 // Sets the number of every card in the deck
@@ -106,7 +107,7 @@ void action_cards(int card, deck *cards, Players *player)
 	if (card == flip_three) {
 		for (int i = 0; i < 3 && player->in_game; i++) {
 			hit(cards, player);
-			bust(player);
+			bust(cards, player);
 		}
 	}
 }

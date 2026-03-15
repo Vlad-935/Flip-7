@@ -5,6 +5,37 @@
 
 #include "utils.h"
 
+void bust(deck *cards, Players *player)
+{
+	int duplicate = -1;
+	for (int i = 0; i < number_cards; i++) {
+		if (player->cards_in_hand[i] > 1) {
+			duplicate = i;
+			break;
+		}
+	}
+
+	if (duplicate == -1) {
+		return;
+	}
+
+	update_bust_state(duplicate, player);  // Set player as busted if they have 2 dublicates
+
+	if (player->busted) {
+		clear_screen();
+		printf("Player %d busted!\n", player->id);
+		delay_ms(text_time);
+	} else {
+		cards->discard[duplicate]++;
+		cards->discard[second_chance]++;
+		cards->dicard_nmb += 2;
+
+		clear_screen();
+		printf("Player %d used second chance!\n", player->id);
+		delay_ms(text_time);
+	}
+}
+
 void new_round_setup(round_state *round, Players *player)
 {
 	// Round related
@@ -53,7 +84,7 @@ void make_choice(round_state *round, deck *cards, Players *player)
 	switch (option) {
 		case 1:	 // hit
 			hit(cards, &player[round->players_turn]);
-			bust(&player[round->players_turn]);
+			bust(cards, &player[round->players_turn]);
 
 			break;
 		case 2:	 // stay

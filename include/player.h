@@ -15,9 +15,7 @@ typedef struct {
 
 Players *player_setup(int player_count);
 
-void update_bust_state(Players *player);
-
-void bust(Players *player);
+void update_bust_state(int duplpicate, Players *player);
 
 void show_player_cards(Players player);
 

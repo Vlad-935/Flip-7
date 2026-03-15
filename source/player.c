@@ -30,23 +30,14 @@ Players *player_setup(int player_count)
 	return player;
 }
 
-void update_bust_state(Players *player)
+void update_bust_state(int duplicate, Players *player)
 {
-	for (int i = 0; i < number_cards; i++) {
-		if (player->cards_in_hand[i] > 1) {
-			player->in_game = false;
-			player->busted = true;
-		}
-	}
-}
-
-void bust(Players *player)
-{
-	update_bust_state(player);	// Set player as busted if they have 2 dublicates
-	if (player->busted) {
-		clear_screen();
-		printf("Player %d busted!\n", player->id);
-		delay_ms(text_time);
+	if (player->cards_in_hand[second_chance] > 0) {
+		player->cards_in_hand[second_chance]--;
+		player->cards_in_hand[duplicate]--;
+	} else {
+		player->in_game = false;
+		player->busted = true;
 	}
 }
 
