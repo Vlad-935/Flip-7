@@ -5,9 +5,6 @@
 
 #include "utils.h"
 
-#define diff_cards 22
-#define text_time 2000
-
 // Sets the number of every card in the deck
 void card_setup(deck *cards)
 {
@@ -15,7 +12,7 @@ void card_setup(deck *cards)
 	cards->dicard_nmb = 0;
 
 	cards->main[0] = 1;	 // special number 0
-	for (int i = 1; i <= 12; i++) {
+	for (int i = 1; i < number_cards; i++) {
 		cards->main[i] = i;
 	}
 
@@ -38,7 +35,7 @@ void card_setup(deck *cards)
 void show_card(int card)
 {
 	// Number cards
-	if (card <= 12) {
+	if (card < number_cards) {
 		printf("Card: %d\n", card);
 	}
 
@@ -98,7 +95,10 @@ void action_cards(int card, deck *cards, Players *player)
 {
 	if (card == freeze) {
 		// Needs a new if to see if it their first card
-		player->in_game = false;
+		if (player->total_cards > 1) {
+			player->in_game = false;
+			printf("Player is out: Freeze\n");
+		}
 	}
 
 	if (card == flip_three) {
@@ -126,5 +126,6 @@ void hit(deck *cards, Players *player)
 	cards->discard[card]++;
 	cards->dicard_nmb++;
 
+	player->total_cards++;
 	player->cards_in_hand[card]++;
 }

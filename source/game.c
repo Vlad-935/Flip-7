@@ -5,52 +5,6 @@
 
 #include "utils.h"
 
-#define diff_cards 22
-#define text_time 2000
-
-void make_choice(round_state *round, deck *cards, Players *player)
-{
-	int option;
-
-	clear_screen();
-	printf(
-		"Player %d:\n"
-		"Points: %d\n"
-		"Current cards:\n",
-		round->players_turn, player[round->players_turn].total_points);
-	show_player_cards(player[round->players_turn]);
-	printf("Hit/Stay\n");
-
-	scanf("%d", &option);
-
-	switch (option) {
-		case 1:	 // hit
-			hit(cards, &player[round->players_turn]);
-
-			update_bust_state(&player[round->players_turn]);  // Set player as busted if they have 2 dublicates
-			if (player[round->players_turn].busted) {
-				clear_screen();
-				printf("Player %d busted!\n", round->players_turn);
-				delay_ms(text_time);
-
-				round->active_players--;
-			}
-
-			break;
-		case 2:	 // stay
-			player[round->players_turn].in_game = false;
-			round->active_players--;
-
-			break;
-		default:  // error
-			clear_screen();
-			printf("Not an option, try again.\n");
-			delay_ms(text_time);
-
-			round->players_turn--;
-	}
-}
-
 void new_round_setup(round_state *round, Players *player)
 {
 	round->flip7 = false;
@@ -64,6 +18,36 @@ void new_round_setup(round_state *round, Players *player)
 		for (int j = 0; j < diff_cards; j++) {
 			player[i].cards_in_hand[j] = 0;
 		}
+		player[i].total_cards = 0;
+	}
+}
+
+void make_choice(round_state *round, deck *cards, Players *player)
+{
+	show_player_cards(player[round->players_turn]);
+
+	int option;
+	printf("Hit/Stay\n");
+	scanf("%d", &option);
+
+	switch (option) {
+		case 1:	 // hit
+			hit(cards, &player[round->players_turn]);
+
+			bust(&round->active_players, &player[round->players_turn]);
+
+			break;
+		case 2:	 // stay
+			player[round->players_turn].in_game = false;
+			round->active_players--;
+
+			break;
+		default:  // error
+			clear_screen();
+			printf("Not an option, try again.\n");
+			delay_ms(text_time);
+
+			round->players_turn--;
 	}
 }
 

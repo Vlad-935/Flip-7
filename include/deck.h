@@ -3,6 +3,9 @@
 
 #include "player.h"
 
+#define number_cards 13
+#define diff_cards 22
+
 // All the specials cards (action/bonus)
 enum cards {
 	freeze = 13,
@@ -17,7 +20,7 @@ enum cards {
 };
 
 typedef struct {
-	int main[22], discard[22];
+	int main[diff_cards], discard[diff_cards];
 	int total_nmb, dicard_nmb;
 } deck;
 
