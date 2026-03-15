@@ -10,16 +10,17 @@ int main(void)
 {
 	srand(time(NULL));
 
-	int player_count;
-	deck cards;
+	round_state round;
+	round.player_count = 0;
 
+	deck cards;
 	card_setup(&cards);
 
 	printf("Introduceti numarul de jucatori: ");
-	scanf("%d", &player_count);
+	scanf("%d", &round.player_count);
 
-	Players *player = player_setup(player_count);
+	Players *player = player_setup(round.player_count);
 
-	game(player_count, &cards, player);
+	game(round, &cards, player);
 	return 0;
 }
