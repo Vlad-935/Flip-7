@@ -5,7 +5,9 @@
 
 typedef struct {
 	int total_points;
-	int different_cards, cards_in_hand[22];
+	int different_cards,
+		total_cards,
+		cards_in_hand[22];
 	bool in_game, busted;
 } Players;
 

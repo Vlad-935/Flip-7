@@ -98,7 +98,10 @@ void action_cards(int card, deck *cards, Players *player)
 {
 	if (card == freeze) {
 		// Needs a new if to see if it their first card
-		player->in_game = false;
+		if (player->total_cards > 1) {
+			player->in_game = false;
+			printf()
+		}
 	}
 
 	if (card == flip_three) {
@@ -126,5 +129,6 @@ void hit(deck *cards, Players *player)
 	cards->discard[card]++;
 	cards->dicard_nmb++;
 
+	player->total_cards++;
 	player->cards_in_hand[card]++;
 }

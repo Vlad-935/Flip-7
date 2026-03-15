@@ -14,6 +14,7 @@ Players *player_setup(int player_count)
 		player[i].in_game = true;
 		player[i].busted = false;
 		player[i].total_points = 0;
+		player[i].total_cards = 0;
 		player[i].different_cards = 0;
 
 		for (int j = 0; j <= 21; j++) {
