@@ -5,12 +5,22 @@
 
 #include "utils.h"
 
-void new_round_setup(round_state *round, Players *player)
+void new_round_setup(round_state *round, deck *cards, Players *player)
 {
+	// Round related
 	round->flip7 = false;
 	round->players_turn = 1;
 	round->active_players = round->player_count;
 
+	// Deck related
+	for (int i = 1; i <= round->player_count; i++) {
+		for (int j = 0; j < diff_cards; j++) {
+			cards->discard[j] += player[i].cards_in_hand[j];
+			cards->dicard_nmb += player[i].cards_in_hand[j];
+		}
+	}
+
+	// Player related
 	for (int i = 1; i <= round->player_count; i++) {
 		player[i].in_game = true;
 		player[i].busted = false;
@@ -60,7 +70,7 @@ void make_choice(round_state *round, deck *cards, Players *player)
 void game_round(round_state round, deck *cards, Players *player)
 {
 	// New round
-	new_round_setup(&round, player);
+	new_round_setup(&round, cards, player);
 
 	// Play until everyone is out, or someone got a flip7
 	while (round.active_players && !round.flip7) {

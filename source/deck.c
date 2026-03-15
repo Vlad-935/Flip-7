@@ -126,12 +126,8 @@ void hit(deck *cards, Players *player)
 	cards->main[card]--;
 	cards->total_nmb--;
 
-	// Needs to be moved (after the round is finished)
-	cards->discard[card]++;
-	cards->dicard_nmb++;
-
-	player->total_cards++;
 	player->cards_in_hand[card]++;
+	player->total_cards++;
 	if (card < diff_cards) {
 		player->different_cards++;
 	}
