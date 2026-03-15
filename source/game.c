@@ -28,7 +28,7 @@ void make_choice(int *players_turn, int *active_players,
 		case 1:	 // hit
 			hit(cards, &player[*players_turn]);
 
-			update_bust_state(&player[*players_turn]);
+			update_bust_state(&player[*players_turn]);	// Set player as busted if they have 2 dublicates
 			if (player[*players_turn].busted) {
 				clear_screen();
 				printf("Player %d busted!\n", *players_turn);

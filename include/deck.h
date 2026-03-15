@@ -27,6 +27,8 @@ void show_card(int card);
 
 void reshuffle_deck(deck *cards);
 
+void action_cards(int card, deck *cards, Players *player);
+
 void hit(deck *cards, Players *player);
 
 #endif
