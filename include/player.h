@@ -23,6 +23,4 @@ void show_player_cards(Players player);
 
 int calculate_points(Players player);
 
-void end_round(int player_count, Players *player);
-
 #endif

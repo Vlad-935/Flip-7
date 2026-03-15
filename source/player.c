@@ -169,13 +169,3 @@ int calculate_points(Players player)
 
 	return round_points;
 }
-
-void end_round(int player_count, Players *player)
-{
-	for (int i = 1; i <= player_count; i++) {
-		int round_points = calculate_points(player[i]);
-		player[i].total_points += round_points;
-
-		player[i].in_game = false;
-	}
-}
