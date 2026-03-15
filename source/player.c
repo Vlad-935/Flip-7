@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "deck.h"
+#include "utils.h"
 
 // Sets everything to 0 for every player
 Players *player_setup(int player_count)
@@ -11,13 +12,17 @@ Players *player_setup(int player_count)
 	Players *player = calloc(player_count + 1, sizeof(Players));
 
 	for (int i = 1; i <= player_count; i++) {
+		player[i].id = i;
+
 		player[i].in_game = true;
 		player[i].busted = false;
+
 		player[i].total_points = 0;
+
 		player[i].total_cards = 0;
 		player[i].different_cards = 0;
 
-		for (int j = 0; j <= 21; j++) {
+		for (int j = 0; j < diff_cards; j++) {
 			player[i].cards_in_hand[j] = 0;
 		}
 	}
@@ -27,8 +32,7 @@ Players *player_setup(int player_count)
 
 void update_bust_state(Players *player)
 {
-	int diff_cards = 13;
-	for (int i = 0; i < diff_cards; i++) {
+	for (int i = 0; i < number_cards; i++) {
 		if (player->cards_in_hand[i] > 1) {
 			player->in_game = false;
 			player->busted = true;
@@ -38,11 +42,21 @@ void update_bust_state(Players *player)
 
 void show_player_cards(Players player)
 {
+	clear_screen();
+	printf(
+		"Player %d:\n"
+		"Points: %d\n",
+		player.id, player.total_points);
+
+	if (player.total_cards > 0) {
+		printf("Current Cards: \n");
+	}
+
 	bool printed;
 
 	// Number cards
 	printed = false;
-	for (int i = 0; i <= 12; i++) {
+	for (int i = 0; i < number_cards; i++) {
 		if (player.cards_in_hand[i] > 0) {
 			printf("%d ", i);
 			printed = true;
@@ -109,7 +123,7 @@ int calculate_points(Players player)
 		return 0;
 	}
 
-	for (int i = 0; i <= 12; i++) {
+	for (int i = 0; i < number_cards; i++) {
 		if (player.cards_in_hand[i] > 0) {
 			round_points += i;
 		}

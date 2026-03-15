@@ -4,6 +4,8 @@
 #include <stdbool.h>
 
 typedef struct {
+	int id;
+
 	int total_points;
 	int different_cards,
 		total_cards,

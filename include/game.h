@@ -11,9 +11,9 @@ typedef struct {
 	bool flip7;
 } round_state;
 
-void make_choice(round_state *round, deck *cards, Players *player);
-
 void new_round_setup(round_state *round, Players *player);
+
+void make_choice(round_state *round, deck *cards, Players *player);
 
 void game_round(round_state round, deck *cards, Players *player);
 

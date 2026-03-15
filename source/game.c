@@ -5,22 +5,31 @@
 
 #include "utils.h"
 
-#define diff_cards 22
 #define text_time 2000
+
+void new_round_setup(round_state *round, Players *player)
+{
+	round->flip7 = false;
+	round->players_turn = 1;
+	round->active_players = round->player_count;
+
+	for (int i = 1; i <= round->player_count; i++) {
+		player[i].in_game = true;
+		player[i].busted = false;
+
+		for (int j = 0; j < diff_cards; j++) {
+			player[i].cards_in_hand[j] = 0;
+		}
+		player[i].total_cards = 0;
+	}
+}
 
 void make_choice(round_state *round, deck *cards, Players *player)
 {
-	int option;
-
-	clear_screen();
-	printf(
-		"Player %d:\n"
-		"Points: %d\n"
-		"Current cards:\n",
-		round->players_turn, player[round->players_turn].total_points);
 	show_player_cards(player[round->players_turn]);
-	printf("Hit/Stay\n");
 
+	int option;
+	printf("Hit/Stay\n");
 	scanf("%d", &option);
 
 	switch (option) {
@@ -48,23 +57,6 @@ void make_choice(round_state *round, deck *cards, Players *player)
 			delay_ms(text_time);
 
 			round->players_turn--;
-	}
-}
-
-void new_round_setup(round_state *round, Players *player)
-{
-	round->flip7 = false;
-	round->players_turn = 1;
-	round->active_players = round->player_count;
-
-	for (int i = 1; i <= round->player_count; i++) {
-		player[i].in_game = true;
-		player[i].busted = false;
-
-		for (int j = 0; j < diff_cards; j++) {
-			player[i].cards_in_hand[j] = 0;
-		}
-		player[i].total_cards = 0;
 	}
 }
 
