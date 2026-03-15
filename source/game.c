@@ -5,8 +5,6 @@
 
 #include "utils.h"
 
-#define text_time 2000
-
 void new_round_setup(round_state *round, Players *player)
 {
 	round->flip7 = false;

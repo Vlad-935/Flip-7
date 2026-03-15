@@ -5,8 +5,6 @@
 
 #include "utils.h"
 
-#define text_time 2000
-
 // Sets the number of every card in the deck
 void card_setup(deck *cards)
 {
