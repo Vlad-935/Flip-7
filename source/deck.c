@@ -94,14 +94,28 @@ void reshuffle_deck(deck *cards)
 	}
 }
 
+void action_cards(int card, deck *cards, Players *player)
+{
+	if (card == freeze) {
+		// Needs a new if to see if it their first card
+		player->in_game = false;
+	}
+
+	if (card == flip_three) {
+		for (int i = 0; i < 3; i++) {
+			hit(cards, player);
+		}
+	}
+}
+
 void hit(deck *cards, Players *player)
 {
-	reshuffle_deck(cards);	// Verify if deck is empty and reshuffle it
+	reshuffle_deck(cards);	// Reshuffles the deck if empty
 
 	int card;
 
 	do {
-		card = rand() % diff_cards;	 // Searches an avaiable card
+		card = rand() % diff_cards;	 // Searches for an available card
 	} while (cards->main[card] == 0);
 
 	show_card(card);
