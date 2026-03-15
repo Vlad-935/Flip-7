@@ -53,18 +53,11 @@ void make_choice(round_state *round, deck *cards, Players *player)
 	switch (option) {
 		case 1:	 // hit
 			hit(cards, &player[round->players_turn]);
-
-			bool busted;
-			busted = bust(&player[round->players_turn]);
-
-			if (busted) {
-				round->active_players--;
-			}
+			bust(&player[round->players_turn]);
 
 			break;
 		case 2:	 // stay
 			player[round->players_turn].in_game = false;
-			round->active_players--;
 
 			break;
 		default:  // error
@@ -73,6 +66,10 @@ void make_choice(round_state *round, deck *cards, Players *player)
 			delay_ms(text_time);
 
 			round->players_turn--;
+	}
+
+	if (!player[round->players_turn].in_game) {
+		round->active_players--;
 	}
 }
 

@@ -17,7 +17,7 @@ Players *player_setup(int player_count);
 
 void update_bust_state(Players *player);
 
-bool bust(Players *player);
+void bust(Players *player);
 
 void show_player_cards(Players player);
 
