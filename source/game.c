@@ -82,7 +82,7 @@ void make_choice(round_state *round, deck *cards, Players *player)
 
 	int option;
 	if ((*player).total_cards) {
-		printf("Hit/Stay\n");
+		printf("Hit(1)/Stay(2)\n");
 		scanf("%d", &option);
 	} else {
 		// First draw is automated
@@ -131,7 +131,7 @@ void game_round(round_state round, deck *cards, Players *player)
 			round.flip7 = true;
 
 			clear_screen();
-			printf("Player %d got FLIP7\n", round.players_turn);
+			printf("Player %d got FLIP7!\n", round.players_turn);
 			delay_ms(text_time);
 		}
 

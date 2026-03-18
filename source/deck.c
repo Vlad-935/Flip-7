@@ -35,40 +35,42 @@ void card_setup(deck *cards)
 
 void show_card(int card)
 {
+	printf("Card: ");
+
 	// Number cards
 	if (card < number_cards) {
-		printf("Card: %d\n", card);
+		printf("%d\n", card);
 	}
 
 	// Action cards
 	if (card == freeze) {
-		printf("Card: Freeze\n");
+		printf("Freeze\n");
 	}
 	if (card == second_chance) {
-		printf("Card: Second Chance\n");
+		printf("Second Chance\n");
 	}
 	if (card == flip_three) {
-		printf("Card: Flip Three\n");
+		printf("Flip Three\n");
 	}
 
 	// Bonus cards
 	if (card == plus_two) {
-		printf("Card: +2\n");
+		printf("+2\n");
 	}
 	if (card == plus_four) {
-		printf("Card: +4\n");
+		printf("+4\n");
 	}
 	if (card == plus_six) {
-		printf("Card: +6\n");
+		printf("+6\n");
 	}
 	if (card == plus_eight) {
-		printf("Card: +8\n");
+		printf("+8\n");
 	}
 	if (card == plus_ten) {
-		printf("Card: +10\n");
+		printf("+10\n");
 	}
 	if (card == times_two) {
-		printf("Card: x2\n");
+		printf("x2\n");
 	}
 
 	delay_ms(text_time);
@@ -99,7 +101,7 @@ void action_cards(int card, deck *cards, Players *player)
 			player->in_game = false;
 
 			clear_screen();
-			printf("Player %d is out: Freeze\n", player->id);
+			printf("Player %d is out: Freeze!\n", player->id);
 			delay_ms(text_time);
 		} else {
 			player->cards_in_hand[freeze]--;
@@ -108,7 +110,7 @@ void action_cards(int card, deck *cards, Players *player)
 			cards->discard[freeze]++;
 			cards->dicard_nmb++;
 
-			printf("Freeze as first card. Redrawing card\n");
+			printf("Freeze as first card. Redrawing card.\n");
 			delay_ms(text_time);
 
 			hit(cards, player);
