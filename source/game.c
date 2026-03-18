@@ -81,8 +81,13 @@ void make_choice(round_state *round, deck *cards, Players *player)
 	show_player_cards(player[round->players_turn]);
 
 	int option;
-	printf("Hit/Stay\n");
-	scanf("%d", &option);
+	if (player[round->players_turn].total_cards) {
+		printf("Hit/Stay\n");
+		scanf("%d", &option);
+	} else {
+		// First draw is automated
+		option = 1;
+	}
 
 	switch (option) {
 		case 1:	 // Hit
