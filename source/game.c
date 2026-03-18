@@ -23,7 +23,7 @@ void bust(deck *cards, Players *player)
 
 	update_bust_state(duplicate, player);  // Set player as busted if they have 2 dublicates
 
-	// Checks to see if player has second chance
+	// Checks to see if player had second chance
 	if (player->busted) {
 		clear_screen();
 		printf("Player %d busted!\n", player->id);
@@ -85,25 +85,25 @@ void make_choice(round_state *round, deck *cards, Players *player)
 	scanf("%d", &option);
 
 	switch (option) {
-		case 1:	 // hit
+		case 1:	 // Hit
 			hit(cards, &player[round->players_turn]);
 			bust(cards, &player[round->players_turn]);
 
+			if (!player[round->players_turn].in_game) {
+				round->active_players--;
+			}
 			break;
-		case 2:	 // stay
+		case 2:	 // Stay
 			player[round->players_turn].in_game = false;
+			round->active_players--;
 
 			break;
-		default:  // error
+		default:  // Error
 			clear_screen();
 			printf("Not an option, try again.\n");
 			delay_ms(text_time);
 
 			round->players_turn--;
-	}
-
-	if (!player[round->players_turn].in_game) {
-		round->active_players--;
 	}
 }
 
@@ -124,6 +124,10 @@ void game_round(round_state round, deck *cards, Players *player)
 
 		if (player[round.players_turn].different_cards == 7) {
 			round.flip7 = true;
+
+			clear_screen();
+			printf("Player %d got FLIP7\n", round.players_turn);
+			delay_ms(text_time);
 		}
 
 		round.players_turn++;

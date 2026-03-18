@@ -35,6 +35,7 @@ void update_bust_state(int duplicate, Players *player)
 	if (player->cards_in_hand[second_chance] > 0) {
 		player->cards_in_hand[second_chance]--;
 		player->cards_in_hand[duplicate]--;
+		player->total_cards -= 2;
 	} else {
 		player->in_game = false;
 		player->busted = true;
