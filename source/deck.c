@@ -134,13 +134,14 @@ void hit(deck *cards, Players *player)
 	} while (cards->main[card] == 0);
 
 	show_card(card);
+	action_cards(card, cards, player);
 
 	cards->main[card]--;
 	cards->total_nmb--;
 
 	player->cards_in_hand[card]++;
 	player->total_cards++;
-	if (card < diff_cards) {
+	if (card < diff_cards && player->cards_in_hand[card] == 1) {
 		player->different_cards++;
 	}
 }
