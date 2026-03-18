@@ -5,6 +5,7 @@
 #include "deck.h"
 #include "game.h"
 #include "player.h"
+#include "utils.h"
 
 int main(void)
 {
@@ -16,6 +17,7 @@ int main(void)
 	deck cards;
 	card_setup(&cards);
 
+	clear_screen();
 	printf("Enter the number of players: ");
 	scanf("%d", &round.player_count);
 
