@@ -78,10 +78,10 @@ void end_round(int player_count, deck *cards, Players *player)
 
 void make_choice(round_state *round, deck *cards, Players *player)
 {
-	show_player_cards(player[round->players_turn]);
+	show_player_cards(*player);
 
 	int option;
-	if (player[round->players_turn].total_cards) {
+	if ((*player).total_cards) {
 		printf("Hit/Stay\n");
 		scanf("%d", &option);
 	} else {
@@ -91,16 +91,12 @@ void make_choice(round_state *round, deck *cards, Players *player)
 
 	switch (option) {
 		case 1:	 // Hit
-			hit(cards, &player[round->players_turn]);
-			bust(cards, &player[round->players_turn]);
+			hit(cards, &(*player));
+			bust(cards, &(*player));
 
-			if (!player[round->players_turn].in_game) {
-				round->active_players--;
-			}
 			break;
 		case 2:	 // Stay
-			player[round->players_turn].in_game = false;
-			round->active_players--;
+			(*player).in_game = false;
 
 			break;
 		default:  // Error
@@ -109,6 +105,10 @@ void make_choice(round_state *round, deck *cards, Players *player)
 			delay_ms(text_time);
 
 			round->players_turn--;
+	}
+
+	if (!(*player).in_game) {
+		round->active_players--;
 	}
 }
 
@@ -124,7 +124,7 @@ void game_round(round_state round, deck *cards, Players *player)
 		}
 
 		if (player[round.players_turn].in_game) {
-			make_choice(&round, cards, player);
+			make_choice(&round, cards, &player[round.players_turn]);
 		}
 
 		if (player[round.players_turn].different_cards == 7) {
