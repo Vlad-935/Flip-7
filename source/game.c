@@ -190,8 +190,10 @@ void game(round_state round, deck *cards, Players *player)
 		winner = check_winner(round, player);
 	}
 
-	printf(
-		"Game Ended!\n"
-		"Winner: Player %d",
-		winner);
+	printf("\n");
+	for (int i = 1; i <= round.player_count; i++) {
+		printf("Player %d: %d points\n", i, player[i].total_points);
+	}
+
+	printf("Game Ended!\n");
 }

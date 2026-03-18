@@ -16,7 +16,7 @@ int main(void)
 	deck cards;
 	card_setup(&cards);
 
-	printf("Introduceti numarul de jucatori: ");
+	printf("Enter the number of players: ");
 	scanf("%d", &round.player_count);
 
 	Players *player = player_setup(round.player_count);
