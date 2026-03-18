@@ -7,6 +7,7 @@
 
 void bust(deck *cards, Players *player)
 {
+	// Searching for duplicate number card
 	int duplicate = -1;
 	for (int i = 0; i < number_cards; i++) {
 		if (player->cards_in_hand[i] > 1) {
@@ -15,12 +16,14 @@ void bust(deck *cards, Players *player)
 		}
 	}
 
+	// Stops if player didn't bust
 	if (duplicate == -1) {
 		return;
 	}
 
 	update_bust_state(duplicate, player);  // Set player as busted if they have 2 dublicates
 
+	// Checks to see if player has second chance
 	if (player->busted) {
 		clear_screen();
 		printf("Player %d busted!\n", player->id);

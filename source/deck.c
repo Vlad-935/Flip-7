@@ -97,10 +97,21 @@ void action_cards(int card, deck *cards, Players *player)
 	if (card == freeze) {
 		if (player->total_cards > 1) {
 			player->in_game = false;
+
 			clear_screen();
 			printf("Player %d is out: Freeze\n", player->id);
 			delay_ms(text_time);
 		} else {
+			player->cards_in_hand[freeze]--;
+			player->total_cards--;
+
+			cards->discard[freeze]++;
+			cards->dicard_nmb++;
+
+			printf("Freeze as first card. Redrawing card\n");
+			delay_ms(text_time);
+
+			hit(cards, player);
 		}
 	}
 
