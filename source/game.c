@@ -136,6 +136,45 @@ void game_round(round_state round, deck *cards, Players *player)
 	end_round(round.player_count, cards, player);
 }
 
+bool check_winner(round_state round, Players *player)
+{
+	int max_points = 0,
+		max_count = 1,
+		player_id;
+	for (int i = 1; i <= round.player_count; i++) {
+		if (player[i].total_points > max_points) {
+			max_points = player[i].total_points;
+			max_count = 1;
+
+			player_id = i;
+		} else if (player[i].total_points == max_points) {
+			max_count++;
+		}
+	}
+
+	int points_needed_to_win = 200;
+	if (max_points > points_needed_to_win) {
+		if (max_count == 1) {
+			clear_screen();
+			printf(
+				"Player %d won!\n"
+				"Points: %d\n",
+				player_id, max_points);
+			delay_ms(text_time);
+
+			return 1;
+		} else {
+			clear_screen();
+			printf(
+				"It's a tie!\n"
+				"Continue playing until someone wins!\n");
+			delay_ms(text_time);
+		}
+	}
+
+	return 0;
+}
+
 void game(round_state round, deck *cards, Players *player)
 {
 	bool winner = false;
@@ -147,6 +186,8 @@ void game(round_state round, deck *cards, Players *player)
 		clear_screen();
 		printf("Round ended!\n");
 		delay_ms(text_time);
+
+		winner = check_winner(round, player);
 	}
 
 	printf(

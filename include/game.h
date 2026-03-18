@@ -21,6 +21,8 @@ void make_choice(round_state *round, deck *cards, Players *player);
 
 void game_round(round_state round, deck *cards, Players *player);
 
+bool check_winner(round_state round, Players *player);
+
 void game(round_state round, deck *cards, Players *player);
 
 #endif
