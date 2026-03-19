@@ -16,7 +16,7 @@ Link: https://theop.games/pages/flip-7
 >It removes the players interactions with each other.
 >(Action cards)
 
-## Objective 🎯
+## 🎯 Objective 
 
 Be first player to reach 200 points by drawing cards.
 
@@ -26,7 +26,7 @@ If you get 7 unique cards you get a FLIP7 bonus, rewarding you with 15 bonus poi
 
 If you ever get a copy of a number card you already have, you bust and lose the points of that round.
 
-## Cards 🎴
+## 🎴 Cards 
 
 The total number of cards is 94.
 
@@ -58,7 +58,7 @@ The total number of cards is 94.
 <kbd>🟡 Flip-Three</kbd> x3 <br>
 <kbd>🔴 Second-Chance</kbd> x3 <br>
 
-## How to play 📖
+## 📖 How to play 
 
 ### 1. Setup
 Enter the number of players.
@@ -110,7 +110,7 @@ At the end of every round everyone's points are calculated and added to their to
 * FLIP7 bonus:
 <kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 <kbd>+4</kbd> = 30 + <kbd>FLIP7(+15)</kbd> = 45
 
-## End of game 🏆
+## 🏆 End of game 
 
 The game end when a player reaches 200 points.
 
