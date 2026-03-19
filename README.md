@@ -105,10 +105,10 @@ At the end of every round everyone's points are calculated and added to their to
 <kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26</kbd>
 
 * Modifier (+4):
-<kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 + <kbd>+4</kbd> = 30
+<kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 <kbd>+4</kbd> = 30
 
 * FLIP7 bonus:
-<kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 + <kbd>+4</kbd> = 30 + <kbd>FLIP7 (+15)</kbd> = 45
+<kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 <kbd>+4</kbd> = 30 + <kbd>FLIP7(+15)</kbd> = 45
 
 ## End of game
 
