@@ -2,7 +2,7 @@
 Flip7 by Eric Olsen. <br>
 THE GREATEST CARD GAME OF ALL TIME!
 
-## Important
+## ❗Important❗
 
 >This game is a digital version of the card game "Flip7" made by Eric Olsen.<br>
 >This is not my original idea, but a recreation of a card game i like, made so i could play online and exercise my coding skills.
@@ -16,7 +16,7 @@ Link: https://theop.games/pages/flip-7
 >It removes the players interactions with each other.
 >(Action cards)
 
-## Objective
+## Objective 🎯
 
 Be first player to reach 200 points by drawing cards.
 
@@ -26,7 +26,7 @@ If you get 7 unique cards you get a FLIP7 bonus, rewarding you with 15 bonus poi
 
 If you ever get a copy of a number card you already have, you bust and lose the points of that round.
 
-## Cards
+## Cards 🎴
 
 The total number of cards is 94.
 
@@ -50,15 +50,15 @@ The total number of cards is 94.
 
 ### Score modifier cards
 
-<kbd>+2 +4 +6 +8 +10 x2</kbd> x1
+<kbd>🟣 +2 +4 +6 +8 +10 x2</kbd> x1
 
 ### Action cards
 
-<kbd>Freeze</kbd> x3 <br>
-<kbd>Flip-Three</kbd> x3 <br>
-<kbd>Second-Chance</kbd> x3 <br>
+<kbd>🔵 Freeze</kbd> x3 <br>
+<kbd>🟡 Flip-Three</kbd> x3 <br>
+<kbd>🔴 Second-Chance</kbd> x3 <br>
 
-## How to play
+## How to play 📖
 
 ### 1. Setup
 Enter the number of players.
@@ -77,7 +77,7 @@ If they choose to stay, they are out of the round and their points are calculate
 ### 3. Action cards
 * Freeze: The player who gets this card is out of the round, but keeps his points.
 
-> [!NOTE] <br>
+>❗NOTE❗ <br>
 > If Freeze is the player's first card, it will be discarded and the player will get a new card.
 
 * Flip-Three: The player who gets this card is forced to draw 3 cards, if they bust while drawing, they stop immediately.
@@ -86,7 +86,7 @@ If they choose to stay, they are out of the round and their points are calculate
 
 You can have more than one of this cards in your hand.
 
-> [!IMPORTANT] <br>
+>❗IMPORTANT❗ <br>
 > The Freeze and Flip-Three rules are slightly different. Normally, the card can be played on any player, the player who drew it picks someone to get the punishment (including themself).<br>
 Also you can have only one Second-Chance card, additional ones are given to other active players or discared if there aren't any available.
 
@@ -110,7 +110,7 @@ At the end of every round everyone's points are calculated and added to their to
 * FLIP7 bonus:
 <kbd>3</kbd> + <kbd>4</kbd> + <kbd>6</kbd> = 13 <kbd>x2</kbd> = 26 <kbd>+4</kbd> = 30 + <kbd>FLIP7(+15)</kbd> = 45
 
-## End of game
+## End of game 🏆
 
 The game end when a player reaches 200 points.
 
