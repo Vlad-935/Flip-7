@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "colors.h"
 #include "deck.h"
 #include "utils.h"
 
@@ -71,15 +72,21 @@ void show_player_cards(Players player)
 	// Action cards
 	printed = false;
 	if (player.cards_in_hand[freeze] > 0) {
-		printf("Freeze x%d ", player.cards_in_hand[freeze]);
+		printf(CYAN "Freeze" RESET
+					"x%d ",
+			   player.cards_in_hand[freeze]);
 		printed = true;
 	}
 	if (player.cards_in_hand[second_chance] > 0) {
-		printf("Second Chance x%d ", player.cards_in_hand[second_chance]);
+		printf(RED "Second Chance" RESET
+				   " x%d ",
+			   player.cards_in_hand[second_chance]);
 		printed = true;
 	}
 	if (player.cards_in_hand[flip_three] > 0) {
-		printf("Flip Three x%d ", player.cards_in_hand[flip_three]);
+		printf(YELLOW "Flip Three" RESET
+					  " x%d ",
+			   player.cards_in_hand[flip_three]);
 		printed = true;
 	}
 	if (printed) {
@@ -89,27 +96,27 @@ void show_player_cards(Players player)
 	// Special cards
 	printed = false;
 	if (player.cards_in_hand[plus_two] == 1) {
-		printf("+2 ");
+		printf(MAGENTA "+2 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_four] == 1) {
-		printf("+4 ");
+		printf(MAGENTA "+4 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_six] == 1) {
-		printf("+6 ");
+		printf(MAGENTA "+6 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_eight] == 1) {
-		printf("+8 ");
+		printf(MAGENTA "+8 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_ten] == 1) {
-		printf("+10 ");
+		printf(MAGENTA "+10 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[times_two] == 1) {
-		printf("x2 ");
+		printf(MAGENTA "x2 " RESET);
 		printed = true;
 	}
 	if (printed) {

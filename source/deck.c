@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "colors.h"
 #include "game.h"
 #include "utils.h"
 
@@ -44,33 +45,33 @@ void show_card(int card)
 
 	// Action cards
 	if (card == freeze) {
-		printf("Freeze\n");
+		printf(CYAN "Freeze\n" RESET);
 	}
 	if (card == second_chance) {
-		printf("Second Chance\n");
+		printf(RED "Second Chance\n" RESET);
 	}
 	if (card == flip_three) {
-		printf("Flip Three\n");
+		printf(YELLOW "Flip Three\n" RESET);
 	}
 
 	// Bonus cards
 	if (card == plus_two) {
-		printf("+2\n");
+		printf(MAGENTA "+2\n" RESET);
 	}
 	if (card == plus_four) {
-		printf("+4\n");
+		printf(MAGENTA "+4\n" RESET);
 	}
 	if (card == plus_six) {
-		printf("+6\n");
+		printf(MAGENTA "+6\n" RESET);
 	}
 	if (card == plus_eight) {
-		printf("+8\n");
+		printf(MAGENTA "+8\n" RESET);
 	}
 	if (card == plus_ten) {
-		printf("+10\n");
+		printf(MAGENTA "+10\n" RESET);
 	}
 	if (card == times_two) {
-		printf("x2\n");
+		printf(MAGENTA "x2\n" RESET);
 	}
 
 	delay_ms(text_time);
@@ -101,7 +102,10 @@ void action_cards(int card, deck *cards, Players *player)
 			player->in_game = false;
 
 			clear_screen();
-			printf("Player %d is out: Freeze!\n", player->id);
+			printf("Player %d is out: "	 //
+				   CYAN "Freeze" RESET
+				   "!\n",
+				   player->id);
 			delay_ms(text_time);
 		} else {
 			player->cards_in_hand[freeze]--;
@@ -110,7 +114,8 @@ void action_cards(int card, deck *cards, Players *player)
 			cards->discard[freeze]++;
 			cards->dicard_nmb++;
 
-			printf("Freeze as first card. Redrawing card.\n");
+			printf(CYAN "Freeze" RESET
+						" as first card. Redrawing card.\n");
 			delay_ms(text_time);
 
 			hit(cards, player);

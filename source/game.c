@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#include "colors.h"
 #include "utils.h"
 
 void bust(deck *cards, Players *player)
@@ -26,7 +27,7 @@ void bust(deck *cards, Players *player)
 	// Checks to see if player had second chance
 	if (player->busted) {
 		clear_screen();
-		printf("Player %d busted!\n", player->id);
+		printf(RED "Player %d busted!\n" RESET, player->id);
 		delay_ms(text_time);
 	} else {
 		cards->discard[duplicate]++;
@@ -34,7 +35,10 @@ void bust(deck *cards, Players *player)
 		cards->dicard_nmb += 2;
 
 		clear_screen();
-		printf("Player %d used second chance!\n", player->id);
+		printf("Player %d used "  //
+			   RED "Second Chance" RESET
+			   "!\n",
+			   player->id);
 		delay_ms(text_time);
 	}
 }
@@ -131,7 +135,7 @@ void game_round(round_state round, deck *cards, Players *player)
 			round.flip7 = true;
 
 			clear_screen();
-			printf("Player %d got FLIP7!\n", round.players_turn);
+			printf(GREEN "Player %d got FLIP7!\n" RESET, round.players_turn);
 			delay_ms(text_time);
 		}
 
@@ -161,10 +165,9 @@ bool check_winner(round_state round, Players *player)
 	if (max_points > points_needed_to_win) {
 		if (max_count == 1) {
 			clear_screen();
-			printf(
-				"Player %d won!\n"
-				"Points: %d\n",
-				player_id, max_points);
+			printf(GREEN "Player %d won!\n" RESET
+						 "Points: %d\n",
+				   player_id, max_points);
 			delay_ms(text_time);
 
 			return 1;
