@@ -24,5 +24,7 @@ int main(void)
 	Players *player = player_setup(round.player_count);
 
 	game(round, &cards, player);
+
+	free(player);
 	return 0;
 }
