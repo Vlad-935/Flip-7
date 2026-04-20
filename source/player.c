@@ -51,11 +51,12 @@ Players *player_setup(int player_count)
 void update_name(Players *player, int player_count)
 {
 	for (int i = 1; i <= player_count; i++) {
+		clear_screen();
 		printf(
-			"Player 1:\n"
+			"Player %d:\n"
 			"Old name: %s\n"
 			"New name: ",
-			player[i].name);
+			i, player[i].name);
 
 		char buffer[100];
 		scanf("%s", buffer);

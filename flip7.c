@@ -23,6 +23,8 @@ int main(void)
 
 	Players *player = player_setup(round.player_count);
 
+	main_menu(player, round.player_count);
+
 	game(round, &cards, player);
 
 	for (int i = 1; i <= round.player_count; i++) {

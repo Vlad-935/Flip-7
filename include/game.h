@@ -25,4 +25,6 @@ bool check_winner(round_state round, Players *player);
 
 void game(round_state round, deck *cards, Players *player);
 
+void main_menu(Players *player, int player_count);
+
 #endif

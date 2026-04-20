@@ -205,3 +205,35 @@ void game(round_state round, deck *cards, Players *player)
 
 	printf("Game Ended!\n");
 }
+
+void main_menu(Players *player, int player_count)
+{
+	while (true) {
+		clear_screen();
+		printf(
+			GREEN "Flip7!\n" RESET
+				  "Main Menu\n"
+				  "(1) Play\n"
+				  "(2) Change Name\n");
+
+		int option;
+		scanf("%d", &option);
+
+		switch (option) {
+		case 1:
+			return;
+			break;
+
+		case 2:
+			update_name(player, player_count);
+			return;
+			break;
+
+		default:
+			clear_screen();
+			printf("Not an option, try again.\n");
+			delay_ms(text_time);
+			break;
+		}
+	}
+}
