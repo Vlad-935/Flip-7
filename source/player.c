@@ -23,7 +23,7 @@ Players *player_setup(int player_count)
 		// Name
 		char buffer[50];
 		sprintf(buffer, "Player %d", i);
-		player[i].name = calloc(strlen(buffer), sizeof(char));
+		player[i].name = calloc(strlen(buffer) + 1, sizeof(char));
 		if (!player[i].name) {
 			return player;
 		}
@@ -61,7 +61,7 @@ void update_name(Players *player, int player_count)
 		char buffer[100];
 		scanf("%s", buffer);
 
-		char *temp = realloc(player[i].name, strlen(buffer));
+		char *temp = realloc(player[i].name, strlen(buffer) + 1);
 		if (!temp) {
 			return;
 		}
