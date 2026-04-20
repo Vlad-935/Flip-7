@@ -3,10 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "colors.h"
+#include "game.h"
 #include "utils.h"
-
-#define diff_cards 22
-#define text_time 2000
 
 // Sets the number of every card in the deck
 void card_setup(deck *cards)
@@ -15,7 +14,7 @@ void card_setup(deck *cards)
 	cards->dicard_nmb = 0;
 
 	cards->main[0] = 1;	 // special number 0
-	for (int i = 1; i <= 12; i++) {
+	for (int i = 1; i < number_cards; i++) {
 		cards->main[i] = i;
 	}
 
@@ -37,40 +36,42 @@ void card_setup(deck *cards)
 
 void show_card(int card)
 {
+	printf("Card: ");
+
 	// Number cards
-	if (card <= 12) {
-		printf("Card: %d\n", card);
+	if (card < number_cards) {
+		printf("%d\n", card);
 	}
 
 	// Action cards
 	if (card == freeze) {
-		printf("Card: Freeze\n");
+		printf(CYAN "Freeze\n" RESET);
 	}
 	if (card == second_chance) {
-		printf("Card: Second Chance\n");
+		printf(RED "Second Chance\n" RESET);
 	}
 	if (card == flip_three) {
-		printf("Card: Flip Three\n");
+		printf(YELLOW "Flip Three\n" RESET);
 	}
 
 	// Bonus cards
 	if (card == plus_two) {
-		printf("Card: +2\n");
+		printf(MAGENTA "+2\n" RESET);
 	}
 	if (card == plus_four) {
-		printf("Card: +4\n");
+		printf(MAGENTA "+4\n" RESET);
 	}
 	if (card == plus_six) {
-		printf("Card: +6\n");
+		printf(MAGENTA "+6\n" RESET);
 	}
 	if (card == plus_eight) {
-		printf("Card: +8\n");
+		printf(MAGENTA "+8\n" RESET);
 	}
 	if (card == plus_ten) {
-		printf("Card: +10\n");
+		printf(MAGENTA "+10\n" RESET);
 	}
 	if (card == times_two) {
-		printf("Card: x2\n");
+		printf(MAGENTA "x2\n" RESET);
 	}
 
 	delay_ms(text_time);
@@ -94,14 +95,49 @@ void reshuffle_deck(deck *cards)
 	}
 }
 
+void action_cards(int card, deck *cards, Players *player)
+{
+	if (card == freeze) {
+		if (player->total_cards > 1) {
+			player->in_game = false;
+
+			clear_screen();
+			printf("%s is out: "  //
+				   CYAN "Freeze" RESET
+				   "!\n",
+				   player->name);
+			delay_ms(text_time);
+		} else {
+			player->cards_in_hand[freeze]--;
+			player->total_cards--;
+
+			cards->discard[freeze]++;
+			cards->dicard_nmb++;
+
+			printf(CYAN "Freeze" RESET
+						" as first card. Redrawing card.\n");
+			delay_ms(text_time);
+
+			hit(cards, player);
+		}
+	}
+
+	if (card == flip_three) {
+		for (int i = 0; i < 3 && player->in_game; i++) {
+			hit(cards, player);
+			bust(cards, player);
+		}
+	}
+}
+
 void hit(deck *cards, Players *player)
 {
-	reshuffle_deck(cards);	// Verify if deck is empty and reshuffle it
+	reshuffle_deck(cards);	// Reshuffles the deck if empty
 
 	int card;
 
 	do {
-		card = rand() % diff_cards;	 // Searches an avaiable card
+		card = rand() % diff_cards;	 // Searches for an available card
 	} while (cards->main[card] == 0);
 
 	show_card(card);
@@ -109,8 +145,11 @@ void hit(deck *cards, Players *player)
 	cards->main[card]--;
 	cards->total_nmb--;
 
-	cards->discard[card]++;
-	cards->dicard_nmb++;
-
 	player->cards_in_hand[card]++;
+	player->total_cards++;
+	if (card < number_cards && player->cards_in_hand[card] == 1) {
+		player->different_cards++;
+	}
+
+	action_cards(card, cards, player);
 }

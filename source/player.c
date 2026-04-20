@@ -2,22 +2,45 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
+#include "colors.h"
 #include "deck.h"
+#include "utils.h"
 
 // Sets everything to 0 for every player
 Players *player_setup(int player_count)
 {
 	Players *player = calloc(player_count + 1, sizeof(Players));
+	if (!player) {
+		return player;
+	}
 
 	for (int i = 1; i <= player_count; i++) {
-		player[i].in_game = true;
-		player[i].round_points = 0;
-		player[i].total_points = 0;
-		player[i].different_cards = 0;
-		player[i].total_cards = 0;
+		// ID
+		player[i].id = i;
 
-		for (int j = 0; j <= 21; j++) {
+		// Name
+		char buffer[50];
+		sprintf(buffer, "Player %d", i);
+		player[i].name = calloc(strlen(buffer) + 1, sizeof(char));
+		if (!player[i].name) {
+			return player;
+		}
+		strcpy(player[i].name, buffer);
+
+		// Game
+		player[i].in_game = true;
+		player[i].busted = false;
+
+		// Points
+		player[i].total_points = 0;
+
+		// Cards
+		player[i].total_cards = 0;
+		player[i].different_cards = 0;
+
+		for (int j = 0; j < diff_cards; j++) {
 			player[i].cards_in_hand[j] = 0;
 		}
 	}
@@ -25,28 +48,58 @@ Players *player_setup(int player_count)
 	return player;
 }
 
-bool update_bust_state(Players *player)
+void update_name(Players *player, int player_count)
 {
-	int diff_cards = 13;
-	for (int i = 0; i < diff_cards; i++) {
-		if (player->cards_in_hand[i] > 1) {
-			player->in_game = false;
-			player->round_points = 0;
+	for (int i = 1; i <= player_count; i++) {
+		clear_screen();
+		printf(
+			"Player %d:\n"
+			"Old name: %s\n"
+			"New name: ",
+			i, player[i].name);
 
-			return true;
+		char buffer[100];
+		scanf("%s", buffer);
+
+		char *temp = realloc(player[i].name, strlen(buffer) + 1);
+		if (!temp) {
+			return;
 		}
-	}
+		player[i].name = temp;
 
-	return false;
+		strcpy(player[i].name, buffer);
+	}
+}
+
+void update_bust_state(int duplicate, Players *player)
+{
+	if (player->cards_in_hand[second_chance] > 0) {
+		player->cards_in_hand[second_chance]--;
+		player->cards_in_hand[duplicate]--;
+		player->total_cards -= 2;
+	} else {
+		player->in_game = false;
+		player->busted = true;
+	}
 }
 
 void show_player_cards(Players player)
 {
+	clear_screen();
+	printf(
+		"%s: \n"
+		"Points: %d\n",
+		player.name, player.total_points);
+
+	if (player.total_cards > 0) {
+		printf("Current Cards: \n");
+	}
+
 	bool printed;
 
 	// Number cards
 	printed = false;
-	for (int i = 0; i <= 12; i++) {
+	for (int i = 0; i < number_cards; i++) {
 		if (player.cards_in_hand[i] > 0) {
 			printf("%d ", i);
 			printed = true;
@@ -59,15 +112,21 @@ void show_player_cards(Players player)
 	// Action cards
 	printed = false;
 	if (player.cards_in_hand[freeze] > 0) {
-		printf("Freeze x%d ", player.cards_in_hand[freeze]);
+		printf(CYAN "Freeze" RESET
+					"x%d ",
+			   player.cards_in_hand[freeze]);
 		printed = true;
 	}
 	if (player.cards_in_hand[second_chance] > 0) {
-		printf("Second Chance x%d ", player.cards_in_hand[second_chance]);
+		printf(RED "Second Chance" RESET
+				   " x%d ",
+			   player.cards_in_hand[second_chance]);
 		printed = true;
 	}
 	if (player.cards_in_hand[flip_three] > 0) {
-		printf("Flip Three x%d ", player.cards_in_hand[flip_three]);
+		printf(YELLOW "Flip Three" RESET
+					  " x%d ",
+			   player.cards_in_hand[flip_three]);
 		printed = true;
 	}
 	if (printed) {
@@ -77,27 +136,27 @@ void show_player_cards(Players player)
 	// Special cards
 	printed = false;
 	if (player.cards_in_hand[plus_two] == 1) {
-		printf("+2 ");
+		printf(MAGENTA "+2 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_four] == 1) {
-		printf("+4 ");
+		printf(MAGENTA "+4 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_six] == 1) {
-		printf("+6 ");
+		printf(MAGENTA "+6 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_eight] == 1) {
-		printf("+8 ");
+		printf(MAGENTA "+8 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[plus_ten] == 1) {
-		printf("+10 ");
+		printf(MAGENTA "+10 " RESET);
 		printed = true;
 	}
 	if (player.cards_in_hand[times_two] == 1) {
-		printf("x2 ");
+		printf(MAGENTA "x2 " RESET);
 		printed = true;
 	}
 	if (printed) {
@@ -109,11 +168,11 @@ int calculate_points(Players player)
 {
 	int round_points = 0;
 
-	if (!player.in_game) {
+	if (player.busted) {
 		return 0;
 	}
 
-	for (int i = 0; i <= 12; i++) {
+	for (int i = 0; i < number_cards; i++) {
 		if (player.cards_in_hand[i] > 0) {
 			round_points += i;
 		}

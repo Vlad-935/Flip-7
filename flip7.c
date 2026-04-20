@@ -1,23 +1,36 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "deck.h"
 #include "game.h"
 #include "player.h"
+#include "utils.h"
 
 int main(void)
 {
-	// setbuf(stdout, NULL);
+	srand(time(NULL));
 
-	int player_count;
+	round_state round;
+	round.player_count = 0;
+
 	deck cards;
-
 	card_setup(&cards);
 
-	printf("Introduceti numarul de jucatori: ");
-	scanf("%d", &player_count);
+	clear_screen();
+	printf("Enter the number of players: ");
+	scanf("%d", &round.player_count);
 
-	Players *player = player_setup(player_count);
+	Players *player = player_setup(round.player_count);
 
-	game(player_count, &cards, player);
+	main_menu(player, round.player_count);
+
+	game(round, &cards, player);
+
+	for (int i = 1; i <= round.player_count; i++) {
+		free(player[i].name);
+	}
+	free(player);
+
 	return 0;
 }
