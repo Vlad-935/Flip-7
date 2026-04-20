@@ -21,7 +21,7 @@ Players *player_setup(int player_count)
 		player[i].id = i;
 
 		// Name
-		char buffer[100];
+		char buffer[50];
 		sprintf(buffer, "Player %d", i);
 		player[i].name = calloc(strlen(buffer), sizeof(char));
 		if (!player[i].name) {
@@ -46,6 +46,28 @@ Players *player_setup(int player_count)
 	}
 
 	return player;
+}
+
+void update_name(Players *player, int player_count)
+{
+	for (int i = 1; i <= player_count; i++) {
+		printf(
+			"Player 1:\n"
+			"Old name: %s\n"
+			"New name: ",
+			player[i].name);
+
+		char buffer[100];
+		scanf("%s", buffer);
+
+		char *temp = realloc(player[i].name, strlen(buffer));
+		if (!temp) {
+			return;
+		}
+		player[i].name = temp;
+
+		strcpy(player[i].name, buffer);
+	}
 }
 
 void update_bust_state(int duplicate, Players *player)
