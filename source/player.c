@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "colors.h"
 #include "deck.h"
@@ -11,15 +12,31 @@
 Players *player_setup(int player_count)
 {
 	Players *player = calloc(player_count + 1, sizeof(Players));
+	if (!player) {
+		return player;
+	}
 
 	for (int i = 1; i <= player_count; i++) {
+		// ID
 		player[i].id = i;
 
+		// Name
+		char buffer[100];
+		sprintf(buffer, "Player %d", i);
+		player[i].name = calloc(strlen(buffer), sizeof(char));
+		if (!player[i].name) {
+			return player;
+		}
+		strcpy(player[i].name, buffer);
+
+		// Game
 		player[i].in_game = true;
 		player[i].busted = false;
 
+		// Points
 		player[i].total_points = 0;
 
+		// Cards
 		player[i].total_cards = 0;
 		player[i].different_cards = 0;
 
@@ -47,9 +64,9 @@ void show_player_cards(Players player)
 {
 	clear_screen();
 	printf(
-		"Player %d:\n"
+		"%s: \n"
 		"Points: %d\n",
-		player.id, player.total_points);
+		player.name, player.total_points);
 
 	if (player.total_cards > 0) {
 		printf("Current Cards: \n");

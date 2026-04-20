@@ -102,10 +102,10 @@ void action_cards(int card, deck *cards, Players *player)
 			player->in_game = false;
 
 			clear_screen();
-			printf("Player %d is out: "	 //
+			printf("%s is out: "  //
 				   CYAN "Freeze" RESET
 				   "!\n",
-				   player->id);
+				   player->name);
 			delay_ms(text_time);
 		} else {
 			player->cards_in_hand[freeze]--;

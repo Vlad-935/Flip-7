@@ -27,7 +27,7 @@ void bust(deck *cards, Players *player)
 	// Checks to see if player had second chance
 	if (player->busted) {
 		clear_screen();
-		printf(RED "Player %d busted!\n" RESET, player->id);
+		printf(RED "%s busted!\n" RESET, player->name);
 		delay_ms(text_time);
 	} else {
 		cards->discard[duplicate]++;
@@ -35,10 +35,10 @@ void bust(deck *cards, Players *player)
 		cards->dicard_nmb += 2;
 
 		clear_screen();
-		printf("Player %d used "  //
+		printf("%s used "  //
 			   RED "Second Chance" RESET
 			   "!\n",
-			   player->id);
+			   player->name);
 		delay_ms(text_time);
 	}
 }
@@ -94,21 +94,21 @@ void make_choice(round_state *round, deck *cards, Players *player)
 	}
 
 	switch (option) {
-		case 1:	 // Hit
-			hit(cards, &(*player));
-			bust(cards, &(*player));
+	case 1:	 // Hit
+		hit(cards, &(*player));
+		bust(cards, &(*player));
 
-			break;
-		case 2:	 // Stay
-			(*player).in_game = false;
+		break;
+	case 2:	 // Stay
+		(*player).in_game = false;
 
-			break;
-		default:  // Error
-			clear_screen();
-			printf("Not an option, try again.\n");
-			delay_ms(text_time);
+		break;
+	default:  // Error
+		clear_screen();
+		printf("Not an option, try again.\n");
+		delay_ms(text_time);
 
-			round->players_turn--;
+		round->players_turn--;
 	}
 
 	if (!(*player).in_game) {
@@ -135,7 +135,7 @@ void game_round(round_state round, deck *cards, Players *player)
 			round.flip7 = true;
 
 			clear_screen();
-			printf(GREEN "Player %d got FLIP7!\n" RESET, round.players_turn);
+			printf(GREEN "%s got FLIP7!\n" RESET, player[round.players_turn].name);
 			delay_ms(text_time);
 		}
 
@@ -165,9 +165,9 @@ bool check_winner(round_state round, Players *player)
 	if (max_points > points_needed_to_win) {
 		if (max_count == 1) {
 			clear_screen();
-			printf(GREEN "Player %d won!\n" RESET
+			printf(GREEN "%s won!\n" RESET
 						 "Points: %d\n",
-				   player_id, max_points);
+				   player[player_id].name, max_points);
 			delay_ms(text_time);
 
 			return 1;
@@ -200,7 +200,7 @@ void game(round_state round, deck *cards, Players *player)
 
 	printf("\n");
 	for (int i = 1; i <= round.player_count; i++) {
-		printf("Player %d: %d points\n", i, player[i].total_points);
+		printf("%s: %d points\n", player[i].name, player[i].total_points);
 	}
 
 	printf("Game Ended!\n");

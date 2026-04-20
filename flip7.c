@@ -25,6 +25,10 @@ int main(void)
 
 	game(round, &cards, player);
 
+	for (int i = 1; i < round.player_count; i++) {
+		free(player[i].name);
+	}
 	free(player);
+
 	return 0;
 }

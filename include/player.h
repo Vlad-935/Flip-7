@@ -5,6 +5,7 @@
 
 typedef struct {
 	int id;
+	char *name;
 
 	int total_points;
 	int different_cards,
