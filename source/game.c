@@ -162,7 +162,7 @@ bool check_winner(round_state round, Players *player)
 	}
 
 	int points_needed_to_win = 200;
-	if (max_points > points_needed_to_win) {
+	if (max_points >= points_needed_to_win) {
 		if (max_count == 1) {
 			clear_screen();
 			printf(GREEN "%s won!\n" RESET
