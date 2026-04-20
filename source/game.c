@@ -226,7 +226,10 @@ void main_menu(Players *player, int player_count)
 
 		case 2:
 			update_name(player, player_count);
-			return;
+
+			clear_screen();
+			printf("Names changed.\n");
+			delay_ms(text_time);
 			break;
 
 		default:
