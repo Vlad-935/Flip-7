@@ -50,6 +50,7 @@ Players *player_setup(int player_count)
 
 void update_name(Players *player, int player_count)
 {
+	getchar();	// Empty the buffer
 	for (int i = 1; i <= player_count; i++) {
 		clear_screen();
 		printf(
@@ -59,7 +60,8 @@ void update_name(Players *player, int player_count)
 			i, player[i].name);
 
 		char buffer[100];
-		scanf("%s", buffer);
+		fgets(buffer, 99, stdin);
+		buffer[strlen(buffer) - 1] = '\0';
 
 		char *temp = realloc(player[i].name, strlen(buffer) + 1);
 		if (!temp) {
